@@ -1,10 +1,10 @@
 import React from "react";
-import { ScrollView, Text, View, Image } from "react-native";
+import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 const styles = {
     title: {
         fontWeight: "bold",
-        textAlign: "center",
-        width: "60%"
+        textAlign: "left",
+        padding: 10
     },
     image: {
         height: 200,
@@ -13,26 +13,29 @@ const styles = {
         marginRight: "auto"
     }
 };
-export default class Apps extends React.Component {
-    render() {
-        const { topheadlines } = this.props;
-        console.log(topheadlines);
-        return (
-            <ScrollView>
-                {topheadlines.data.map(headlines => {
-                    return (
-                        <View key={headlines.title}>
-                            <Image
-                                source={{ uri: headlines.urlToImage }}
-                                style={styles.image}
-                            />
-                            <Text style={styles.title}>{headlines.title}</Text>
-                            <Text>{headlines.url}</Text>
-                            <Text>{headlines.description}</Text>
-                        </View>
-                    );
-                })}
-            </ScrollView>
-        );
-    }
+export default function Headlines({ topheadlines, navigation }) {
+    return (
+        <ScrollView>
+            {topheadlines.data.map(headlines => {
+                return (
+                    <TouchableOpacity
+                        key={headlines.title}
+                        onPress={() =>
+                            navigation.navigate("Articles", {
+                                url: headlines.url
+                            })
+                        }
+                    >
+                        <Image
+                            source={{ uri: headlines.urlToImage }}
+                            style={styles.image}
+                        />
+                        <Text style={styles.title}>{headlines.title}</Text>
+                        <Text>{headlines.url}</Text>
+                        <Text>{headlines.description}</Text>
+                    </TouchableOpacity>
+                );
+            })}
+        </ScrollView>
+    );
 }

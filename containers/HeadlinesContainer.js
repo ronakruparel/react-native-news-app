@@ -14,9 +14,10 @@ class HeadlinesContainer extends React.Component {
     componentDidMount() {
         this.props.getTopHeadlines();
     }
+
     render() {
         return this.props.topheadlines.data.length ? (
-            <Headlines {...this.props} />
+            <Headlines {...this.props} handlePress={this.handlePress} />
         ) : (
             <Text style={styles.welcome}>Loading!!</Text>
         );
