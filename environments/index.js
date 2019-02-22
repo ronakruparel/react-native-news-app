@@ -1,7 +1,8 @@
+import Config from "react-native-config";
 const environments = {
     development: {
-        BASE_URL: "https://newsapi.org/v2/top-headlines",
-        API_KEY: "b9a2923947448b7ba22b48bc573f2e2"
+        BASE_URL: Config.API_URL,
+        API_KEY: Config.API_KEY
     }
 };
 export default environments[process.env.REACT_APP_ENV] ||
